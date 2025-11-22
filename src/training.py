@@ -7,6 +7,9 @@ def train_epoch(model, dataloader, criterion, optimizer, device):
     total_loss = 0.0
     correct = 0
     total = 0
+
+
+
     
     for batch in tqdm(dataloader, desc="Training"):
         sequences = batch["seq"].to(device)
