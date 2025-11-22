@@ -1,0 +1,33 @@
+# Data
+data:
+  train_file: "CTCF_train_sequences.csv"
+  test_file: "CTCF_test_sequences.csv"
+
+# Model
+model:
+  name: "CTCF_model"
+  save_dir: "/Users/tungvuduc/Desktop/PhD/projects/repos/tfbind/models"
+
+# Training hyperparameters
+training:
+  batch_size_train: 65000
+  batch_size_test: 65000
+  lr: 0.001
+  epochs: 200
+  seed: 42
+  print_interval: 20
+  num_workers: 0  # Set to 0 for MPS, increase if using CPU/CUDA
+
+# Optimizer
+optimizer:
+  type: "Adam"
+  weight_decay: 0.0
+
+# Scheduler
+scheduler:
+  type: "CosineAnnealingLR"
+  T_max: 200  # Should match epochs
+
+# Misc
+device: "auto"  # auto, mps, cuda, or cpu
+show_plot: true

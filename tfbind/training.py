@@ -69,6 +69,7 @@ def train_val(
     criterion,
     optimizer,
     device,
+    scheduler,
     show_plot,
     save_model_dir,
     model_name,
@@ -79,11 +80,14 @@ def train_val(
         model = model.load_state_dict(torch.load(pretrained_param_dir))
     train_losses = []
     val_losses = []
+    best_val_loss = float("inf")
 
     print("Start training model...")
     for epoch in tqdm(range(epochs), desc="Training epochs"):
         train_loss, train_acc = train_epoch(model, train_dataloader, criterion, optimizer, device)
         val_loss, val_acc = validate_epoch(model, test_dataloader, criterion, device)
+
+        scheduler.step()
 
         if epoch % print_interval == 0:
             print(f"Train Loss: {train_loss:.4f} | Train Acc: {train_acc:.2f}%")

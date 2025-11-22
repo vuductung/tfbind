@@ -3,7 +3,7 @@ import torch
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import Dataset
 
-from src.processing import dna_to_one_hot_encode
+from tfbind.processing import dna_to_one_hot_encode
 
 
 def load_dataset(path):

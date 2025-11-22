@@ -5,7 +5,7 @@ from unittest.mock import mock_open, patch
 import pytest
 import yaml
 
-from src.utils.paths import get_paths
+from tfbind.utils.paths import get_paths
 
 
 @pytest.fixture
