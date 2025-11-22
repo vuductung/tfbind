@@ -11,7 +11,7 @@ from tfbind.training import train_val
 from tfbind.utils.helper import get_device, get_paths, load_config, set_seed
 
 
-def main(config_name="base.yml"):
+def main(config_name="base.yml", pretrained_model_name="CTCF_model"):
     path = get_paths("local")
 
     # Load configuration
@@ -54,6 +54,16 @@ def main(config_name="base.yml"):
 
     model = DNAConvNet().to(device)
 
+    ### CHANGE THIS CODE!!!!!!!!!!!!!!!!!!!!
+    if pretrained_model_name:
+        pretrained_param_dir = os.path.join(path["model_dir"], pretrained_model_name + ".pth")
+        with torch.no_grad():
+            dummy_input = torch.randn(1, 4, 200).to(device)
+            _ = model(dummy_input)
+        model.load_state_dict(torch.load(pretrained_param_dir, map_location=device))
+        print(f"Loaded pretrained model from {pretrained_model_name}.pth")
+    ### CHANGE THIS CODE!!!!!!!!!!!!!!!!
+
     # Loss, optimizer, and scheduler
     criterion = nn.BCELoss()
     optimizer = torch.optim.Adam(
@@ -73,7 +83,6 @@ def main(config_name="base.yml"):
         show_plot=config["show_plot"],
         save_model_dir=path["model_dir"],
         model_name=config["model"]["name"],
-        pretrained_param_dir=None,
         print_interval=config["training"]["print_interval"],
         scheduler=scheduler,
     )

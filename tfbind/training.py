@@ -73,11 +73,8 @@ def train_val(
     show_plot,
     save_model_dir,
     model_name,
-    pretrained_param_dir=None,
     print_interval=20,
 ):
-    if pretrained_param_dir:
-        model = model.load_state_dict(torch.load(pretrained_param_dir))
     train_losses = []
     val_losses = []
     best_val_loss = float("inf")
@@ -101,8 +98,8 @@ def train_val(
             best_val_loss = val_loss
             save_model_path = os.path.join(save_model_dir, model_name + ".pth")
             torch.save(model.state_dict(), save_model_path)
-            print("✓ Saved best model")
 
     if show_plot:
         plt.plot(train_losses)
         plt.plot(val_losses)
+        plt.show()
