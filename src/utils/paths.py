@@ -7,7 +7,7 @@ import yaml
 def get_paths(environment):
     """Get paths based on environment (local or raven)"""
 
-    config_file = Path(__file__).parent.parent / "configs" / "paths.yaml"
+    config_file = Path(__file__).parent.parent.parent / "configs" / "path.yml"
     with open(config_file) as f:
         config = yaml.safe_load(f)
         paths = config[environment]
