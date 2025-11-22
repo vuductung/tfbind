@@ -79,6 +79,8 @@ def train_val(
         model = model.load_state_dict(torch.load(pretrained_param_dir))
     train_losses = []
     val_losses = []
+
+    print("Start training model...")
     for epoch in tqdm(range(epochs), desc="Training epochs"):
         train_loss, train_acc = train_epoch(model, train_dataloader, criterion, optimizer, device)
         val_loss, val_acc = validate_epoch(model, test_dataloader, criterion, device)
