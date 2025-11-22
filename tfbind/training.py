@@ -12,7 +12,7 @@ def train_epoch(model, dataloader, criterion, optimizer, device):
     correct = 0
     total = 0
 
-    for batch in tqdm(dataloader, desc="Training"):
+    for batch in dataloader:
         sequences = batch["seq"].to(device)
         labels = batch["labels"].to(device)
 
@@ -44,7 +44,7 @@ def validate_epoch(model, dataloader, criterion, device):
     total = 0
 
     with torch.no_grad():
-        for batch in tqdm(dataloader, desc="Validation"):
+        for batch in dataloader:
             sequences = batch["seq"].to(device)
             labels = batch["labels"].to(device)
 
@@ -73,7 +73,7 @@ def train_val(
     show_plot,
     save_model_dir,
     model_name,
-    pretrained_param_dir,
+    pretrained_param_dir=None,
     print_interval=20,
 ):
     if pretrained_param_dir:
@@ -99,8 +99,8 @@ def train_val(
         # Save best model
         if val_loss < best_val_loss:
             best_val_loss = val_loss
-            save_model_dir = os.path.join(save_model_dir, model_name + ".pth")
-            torch.save(model.state_dict(), save_model_dir)
+            save_model_path = os.path.join(save_model_dir, model_name + ".pth")
+            torch.save(model.state_dict(), save_model_path)
             print("✓ Saved best model")
 
     if show_plot:

@@ -11,15 +11,17 @@ from tfbind.training import train_val
 from tfbind.utils.helper import get_device, get_paths, load_config, set_seed
 
 
-def main(config_path="base.yaml"):
+def main(config_name="base.yml"):
+    path = get_paths("local")
+
     # Load configuration
+    config_path = os.path.join(path["config_dir"], config_name)
     config = load_config(config_path)
 
     # Set seed
     set_seed(config["training"]["seed"])
 
     # Paths
-    path = get_paths("local")
     filepath_train = os.path.join(path["data_dir"], config["data"]["train_file"])
     filepath_test = os.path.join(path["data_dir"], config["data"]["test_file"])
 
@@ -59,9 +61,6 @@ def main(config_path="base.yaml"):
     )
     scheduler = CosineAnnealingLR(optimizer, T_max=config["scheduler"]["T_max"])
 
-    # Model save path
-    pretrained_param_dir = os.path.join(config["model"]["save_dir"], f"{config['model']['name']}.pth")
-
     # Train
     train_val(
         epochs=config["training"]["epochs"],
@@ -72,9 +71,9 @@ def main(config_path="base.yaml"):
         optimizer=optimizer,
         device=device,
         show_plot=config["show_plot"],
-        save_model_dir=config["model"]["save_dir"],
+        save_model_dir=path["model_dir"],
         model_name=config["model"]["name"],
-        pretrained_param_dir=pretrained_param_dir,
+        pretrained_param_dir=None,
         print_interval=config["training"]["print_interval"],
         scheduler=scheduler,
     )
@@ -84,7 +83,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Train DNA binding model")
-    parser.add_argument("--config", type=str, default="config.yaml", help="Path to config file")
+    parser.add_argument("--config", type=str, default="base.yml", help="Path to config file")
     args = parser.parse_args()
 
     main(args.config)

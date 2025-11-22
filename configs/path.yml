@@ -3,6 +3,7 @@ local:
   log_dir  : ./logs
   model_dir: ./models
   results_dir: ./results
+  config_dir: ./configs
 
 raven:
   data_dir : /ptmp/dtvu/data/tfbind

@@ -6,7 +6,6 @@ data:
 # Model
 model:
   name: "CTCF_model"
-  save_dir: "/Users/tungvuduc/Desktop/PhD/projects/repos/tfbind/models"
 
 # Training hyperparameters
 training:
