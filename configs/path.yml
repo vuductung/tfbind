@@ -1,0 +1,11 @@
+local
+  data_dir : ./data
+  log_dir  : ./logs
+  model_dir: ./models
+  results_dir: ./results
+
+raven
+  data_dir : /ptmp/dtvu/data/tfbind
+  log_dir  : /ptmp/dtvu/logs/tfbind
+  model_dir: /ptmp/dtvu/models/tfbind
+  results_dir: /ptmp/dtvu/results/tfbind
