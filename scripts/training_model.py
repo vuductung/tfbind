@@ -54,7 +54,7 @@ def main(config_name="base.yml", pretrained_model_name="CTCF_model"):
 
     model = DNAConvNet().to(device)
 
-    ### CHANGE THIS CODE!!!!!!!!!!!!!!!!!!!!
+    ### CHANGE THIS CODE!!!!!!!!!!!!!!!!
     if pretrained_model_name:
         pretrained_param_dir = os.path.join(path["model_dir"], pretrained_model_name + ".pth")
         with torch.no_grad():

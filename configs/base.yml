@@ -2,6 +2,7 @@
 data:
   train_file: "CTCF_train_sequences.csv"
   test_file: "CTCF_test_sequences.csv"
+  valid_file: "CTCF_valid_sequences.csv"
 
 # Model
 model:
