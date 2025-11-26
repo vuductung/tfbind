@@ -52,7 +52,7 @@ class DNAConvNet(nn.Module):
             nn.GELU(),
             nn.Dropout(self.dropout_rate),
             nn.Linear(flattened_size // 2, 1),
-            nn.Sigmoid(),
+            nn.Softmax(),
         )
 
     def forward(self, x):
