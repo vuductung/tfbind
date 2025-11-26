@@ -5,7 +5,7 @@ import torch.nn as nn
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.utils.data import DataLoader
 
-from tfbind.loader import DnaDataset, collate_fn, load_dataset
+from tfbind.loader import DnaDataset, load_dataset
 from tfbind.model import DNAConvNet
 from tfbind.training import train_val
 from tfbind.utils.helper import get_device, get_paths, load_config, set_seed
@@ -37,14 +37,12 @@ def main(config_name="base.yml", pretrained_model_name="CTCF_model"):
         dna_dataset_train,
         batch_size=config["training"]["batch_size_train"],
         shuffle=True,
-        collate_fn=collate_fn,
         num_workers=config["training"]["num_workers"],
     )
     test_dataloader = DataLoader(
         dna_dataset_test,
         batch_size=config["training"]["batch_size_test"],
         shuffle=False,
-        collate_fn=collate_fn,
         num_workers=config["training"]["num_workers"],
     )
 
