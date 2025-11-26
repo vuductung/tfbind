@@ -58,7 +58,7 @@ def main(config_name="base.yml", pretrained_model_name="CTCF_model"):
     if pretrained_model_name:
         pretrained_param_dir = os.path.join(path["model_dir"], pretrained_model_name + ".pth")
         with torch.no_grad():
-            dummy_input = torch.randn(1, 4, 200).to(device)
+            dummy_input = torch.randn(1, 4, 200).to(device)  # (batch, embedding, seq)
             _ = model(dummy_input)
         model.load_state_dict(torch.load(pretrained_param_dir, map_location=device))
         print(f"Loaded pretrained model from {pretrained_model_name}.pth")
